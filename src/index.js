@@ -13,13 +13,15 @@ app.post('/api/upload', (req, res) =>{
         body += data;
     });
 
-    console.log(body)
+    
 
     req.on('end', function (){
+        console.log(body)
         fs.writeFileSync(filePath,body)
+        console.log('file uploaded')
+        res.status(200).send()
     });
-    console.log('file uploaded')
-    res.status(200).send()
+    
 })
 
 const server = app.listen(port, () => {
