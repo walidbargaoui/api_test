@@ -13,6 +13,8 @@ app.post('/api/upload', (req, res) =>{
         body += data;
     });
 
+    console.log(body)
+
     req.on('end', function (){
         fs.writeFileSync(filePath,body)
     });
