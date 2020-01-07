@@ -1,21 +1,10 @@
 const app = require('./app')
 const request = require('request')
-const multer = require('multer')
 const fs = require('fs')
+const path = require('path')
 const port = process.env.PORT || 3000
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './data')
-    },
-    filename: function (req, file, cb) {
-        cb(null, 'test.csv')
-    }
-})
-
-const upload = multer({
-    storage
-})
+const filePath = path.join(__dirname + '/../data/test.csv')
 
 app.post('/api/upload', (req, res) =>{
     var body = ''
@@ -24,7 +13,7 @@ app.post('/api/upload', (req, res) =>{
     });
 
     req.on('end', function (){
-        fs.writeFileSync(__dirname + './../data/test.csv',body)
+        fs.writeFileSync(filePath,body)
     });
 })
 
