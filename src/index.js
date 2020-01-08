@@ -7,7 +7,6 @@ const port = process.env.PORT || 3000
 const filePath = path.join(__dirname + '/../data/test.csv')
 
 app.post('/api/upload', (req, res) =>{
-    console.log('file received')
     var body = ''
     req.on('data', function(data) {
         body += data;
@@ -18,7 +17,6 @@ app.post('/api/upload', (req, res) =>{
     req.on('end', function (){
         console.log(body)
         fs.writeFileSync(filePath,body)
-        console.log('file uploaded')
         res.status(200).send()
     });
     
